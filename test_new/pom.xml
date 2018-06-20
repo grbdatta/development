@@ -1,0 +1,428 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>test</groupId>
+	<artifactId>test_new</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<properties>
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<maven.compiler.source>1.7</maven.compiler.source>
+
+		<maven.compiler.target>1.7</maven.compiler.target>
+
+		<scala.version>2.11.5</scala.version>
+
+		<spark.scala.version>2.11</spark.scala.version>
+
+		<spark.version>2.2.0</spark.version>
+
+	</properties>
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<plugins>
+
+			<plugin>
+
+				<artifactId>maven-compiler-plugin</artifactId>
+
+				<version>3.6.0</version>
+
+				<configuration>
+
+					<source>1.8</source>
+
+					<target>1.8</target>
+
+				</configuration>
+
+			</plugin>
+			<plugin>
+
+				<groupId>org.apache.maven.plugins</groupId>
+
+				<artifactId>maven-assembly-plugin</artifactId>
+
+				<version>2.6</version>
+
+				<configuration>
+
+					<!--get all project dependencies -->
+
+					<descriptorRefs>
+
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+
+					</descriptorRefs>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>src/</classpathPrefix>
+							<mainClass>com.excel_read.DirectKafkaWordCount</mainClass>
+						</manifest>
+					</archive>
+
+					<!--MainClass in mainfest make a executable jar -->
+
+				</configuration>
+
+				<executions>
+
+					<execution>
+
+						<id>make-assembly</id>
+
+						<!--bind to the packaging phase -->
+
+						<phase>package</phase>
+
+						<goals>
+
+							<goal>single</goal>
+
+						</goals>
+
+					</execution>
+
+				</executions>
+
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+
+		<!-- Scala -->
+
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-library</artifactId>
+			<version>2.11.11</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.spark/spark-streaming-kafka-0-8 -->
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-streaming-kafka-0-8_2.11</artifactId>
+			<version>2.2.0</version>
+
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.scala-lang/scala-library -->
+
+		<!-- https://mvnrepository.com/artifact/org.apache.spark/spark-streaming-twitter -->
+
+		<!-- https://mvnrepository.com/artifact/org.apache.bahir/spark-streaming-twitter -->
+		<dependency>
+			<groupId>org.apache.bahir</groupId>
+			<artifactId>spark-streaming-twitter_2.10</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/com.databricks/spark-csv -->
+		<dependency>
+
+			<groupId>com.databricks</groupId>
+			<artifactId>spark-csv_2.11</artifactId>
+			<version>1.5.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.univocity/univocity-parsers -->
+		<dependency>
+			<groupId>com.univocity</groupId>
+			<artifactId>univocity-parsers</artifactId>
+			<version>2.6.2</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-streaming_2.11</artifactId>
+			<version>2.2.0</version>
+		</dependency>
+
+
+
+
+		<!-- Spark -->
+
+		<dependency>
+
+			<groupId>org.apache.spark</groupId>
+
+			<artifactId>spark-core_${spark.scala.version}</artifactId>
+
+			<scope>provided</scope>
+
+			<version>${spark.version}</version>
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>org.apache.spark</groupId>
+
+			<artifactId>spark-sql_${spark.scala.version}</artifactId>
+
+			<version>${spark.version}</version>
+
+			<scope>provided</scope>
+
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.17</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/FRosner/drunken-data-quality -->
+		<dependency>
+			<groupId>FRosner</groupId>
+			<artifactId>drunken-data-quality</artifactId>
+			<version>4.1.1-s_2.11</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.17</version>
+		</dependency>
+
+
+
+
+		<!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients -->
+
+		<dependency>
+
+			<groupId>org.apache.kafka</groupId>
+
+			<artifactId>kafka-clients</artifactId>
+
+			<version>0.10.2.0</version>
+
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/FRosner/drunken-data-quality -->
+
+
+
+		<dependency>
+
+			<groupId>org.apache.spark</groupId>
+
+			<artifactId>spark-hive_${spark.scala.version}</artifactId>
+
+			<version>${spark.version}</version>
+
+			<scope>provided</scope>
+
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.github.zuinnote/spark-hadoopoffice-ds -->
+
+		<!-- https://mvnrepository.com/artifact/com.crealytics/spark-excel -->
+		<dependency>
+			<groupId>com.crealytics</groupId>
+			<artifactId>spark-excel_2.11</artifactId>
+			<version>0.9.15</version>
+		</dependency>
+
+
+
+		<dependency>
+
+			<groupId>org.apache.spark</groupId>
+
+			<artifactId>spark-streaming-kafka-0-10_2.11</artifactId>
+
+			<version>2.1.0</version>
+
+			<scope>test</scope>
+
+		</dependency>
+
+
+
+		<dependency>
+
+			<groupId>org.apache.kafka</groupId>
+
+			<artifactId>kafka_2.11</artifactId>
+
+			<version>0.10.2.1</version>
+
+			<exclusions>
+
+				<exclusion>
+
+					<groupId>com.sun.jmx</groupId>
+
+					<artifactId>jmxri</artifactId>
+
+				</exclusion>
+
+				<exclusion>
+
+					<groupId>com.sun.jdmk</groupId>
+
+					<artifactId>jmxtools</artifactId>
+
+				</exclusion>
+
+				<exclusion>
+
+					<groupId>javax.jms</groupId>
+
+					<artifactId>jms</artifactId>
+
+				</exclusion>
+
+			</exclusions>
+
+		</dependency>
+
+		<!-- Databricks csv -->
+
+		<!-- Datanucleus -->
+
+		<dependency>
+
+			<groupId>org.datanucleus</groupId>
+
+			<artifactId>datanucleus-rdbms</artifactId>
+
+			<version>3.2.9</version>
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>org.datanucleus</groupId>
+
+			<artifactId>datanucleus-core</artifactId>
+
+			<version>3.2.10</version>
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>org.datanucleus</groupId>
+
+			<artifactId>datanucleus-api-jdo</artifactId>
+
+			<version>3.2.6</version>
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>mysql</groupId>
+
+			<artifactId>mysql-connector-java</artifactId>
+
+			<version>6.0.6</version>
+
+		</dependency>
+
+
+
+
+
+		<!-- Joda Converter -->
+
+		<dependency>
+
+			<groupId>org.joda</groupId>
+
+			<artifactId>joda-convert</artifactId>
+
+			<version>1.2</version>
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>org.yaml</groupId>
+
+			<artifactId>snakeyaml</artifactId>
+
+			<version>1.8</version>
+
+		</dependency>
+
+
+
+		<!-- Csv Parsers -->
+
+
+
+		<dependency>
+
+			<groupId>org.apache.commons</groupId>
+
+			<artifactId>commons-csv</artifactId>
+
+			<version>1.1</version>
+
+		</dependency>
+
+
+
+		<!-- Logging -->
+
+		<dependency>
+
+			<groupId>log4j</groupId>
+
+			<artifactId>log4j</artifactId>
+
+			<version>1.2.17</version>
+
+		</dependency>
+		<dependency>
+
+			<groupId>com.googlecode.json-simple</groupId>
+
+			<artifactId>json-simple</artifactId>
+
+			<version>1.1.1</version>
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>com.google.code.gson</groupId>
+
+			<artifactId>gson</artifactId>
+
+			<version>2.8.0</version>
+
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.jayway.jsonpath/json-path -->
+
+		<dependency>
+
+			<groupId>com.jayway.jsonpath</groupId>
+
+			<artifactId>json-path</artifactId>
+
+			<version>2.2.0</version>
+
+		</dependency>
+
+
+
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-io -->
+
+		<!-- <dependency> <groupId>org.apache.commons</groupId> <artifactId>commons-io</artifactId> 
+			<version>1.3.2</version> </dependency> -->
+
+
+
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+
+	</dependencies>
+</project>
